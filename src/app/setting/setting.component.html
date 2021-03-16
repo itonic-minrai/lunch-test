@@ -1,0 +1,57 @@
+<div class="main-container container">
+    <div class="row">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Lunch Settings</div>
+
+            <div class="panel-body">
+
+                <form 
+                    name="setting"
+                    #settingFrom="ngForm" 
+                    (ngSubmit)="settingFrom.form.valid && onSubmit()" novalidate>
+                    
+                    <div class="form-group">
+                        <label for="lunch-amount">Amount *</label>
+                        <input 
+                            id="amount"
+                            class="form-control"
+                            type="number" 
+                            name="amount" 
+                            [(ngModel)]="lunch.amount" 
+                            value="{{lunch.amount}}"
+                            #amount="ngModel" 
+                            required />
+
+                            <div class="text-danger mt-2"
+                                *ngIf="(amount.dirty || amount.touched) && amount.errors && amount.errors.required">
+                                Lunch amount is Required
+                            </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="discount">Discount *</label>
+                        <input 
+                            id="discount"
+                            class="form-control"
+                            type="number"
+                            name="discount" 
+                            [(ngModel)]="lunch.discount" 
+                            value="{{lunch.discount}}"
+                            #discount="ngModel"
+                            required />
+
+                        <div class="text-danger mt-2"
+                            *ngIf="(discount.dirty || discount.touched) && discount.errors && discount.errors.required">
+                            Discount amount is Required
+                        </div>
+                    </div>
+                   
+                    <button class="btn btn-primary ng-star-inserted" type="submit" class="btn btn-success"> Submit</button>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
