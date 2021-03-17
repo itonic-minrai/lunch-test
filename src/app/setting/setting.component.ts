@@ -1,11 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
-import SettingData from './data';
-// import {Setting} from './setting';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import {Settings, SettingResponse} from '../setting';
+import {SettingService} from '../setting.service';
+import {Subscription} from 'rxjs';
 
 
 @Component({
@@ -13,36 +9,38 @@ import SettingData from './data';
   templateUrl: './setting.component.html',
   styleUrls: ['./setting.component.scss']
 })
+export class SettingComponent implements OnInit, OnDestroy {
 
+  lunch: Settings;
+  isSettingsFetched: boolean = false;
+  settingSubscrition: Subscription;
 
-
-
-export class SettingComponent implements OnInit {
-
-  lunch = new SettingData( 50, 8);
-
-  constructor( private http: HttpClient ) {
+  constructor(private setingsService:SettingService) {
 
   };
-
-  get settings(){
-    return this.http.get('http://localhost:3000/settings');
-  }
 
 
   ngOnInit(): void {
     // this.lunch = new SettingData( 50, 8);
-    this.settings.subscribe( (response) =>{
-      if(200 == response.status){
-        console.log(response.data);
+    this.settingSubscrition = this.setingsService.settings.subscribe((setting: Settings) => {
+        this.lunch = setting;
+        this.isSettingsFetched = true;
       }
-    });
-    console.log(this.settings, 'settings');
+    );
   }
 
-  onSubmit( ){
+  onSubmit() {
     console.log('all valid data foundA', this.lunch);
   }
-  
+
+  emitNew(){
+    this.setingsService.emiitNewSetting();
+  }
+
+  ngOnDestroy(){
+    this.settingSubscrition.unsubscribe();
+  }
+
+
 
 }

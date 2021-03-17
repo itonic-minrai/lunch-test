@@ -5,20 +5,19 @@
 
             <div class="panel-body">
 
-                <form 
+                <form  *ngIf="isSettingsFetched"
                     name="setting"
                     #settingFrom="ngForm" 
                     (ngSubmit)="settingFrom.form.valid && onSubmit()" novalidate>
                     
                     <div class="form-group">
-                        <label for="lunch-amount">Amount *</label>
+                        <label for="lunch-amount">{{lunch.lunchAmount.label}} *</label>
                         <input 
                             id="amount"
                             class="form-control"
                             type="number" 
                             name="amount" 
-                            [(ngModel)]="lunch.amount" 
-                            value="{{lunch.amount}}"
+                            [(ngModel)]="lunch.lunchAmount.price" 
                             #amount="ngModel" 
                             required />
 
@@ -30,14 +29,13 @@
 
 
                     <div class="form-group">
-                        <label for="discount">Discount *</label>
+                        <label for="discount">{{lunch.discountAmount.label}} *</label>
                         <input 
                             id="discount"
                             class="form-control"
                             type="number"
                             name="discount" 
-                            [(ngModel)]="lunch.discount" 
-                            value="{{lunch.discount}}"
+                            [(ngModel)]="lunch.discountAmount.percentage" 
                             #discount="ngModel"
                             required />
 
@@ -54,4 +52,5 @@
 
         </div>
     </div>
+    <button (click)="emitNew()">Emmit</button>
 </div>

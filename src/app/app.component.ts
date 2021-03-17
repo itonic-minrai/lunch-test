@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {SettingService} from './setting.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Tour of heroes';
+  constructor(private setingsService:SettingService) {
+
+  };
+
+
+
+  ngOnInit(){
+    this.setingsService.fetchSettings();
+  }
 }
