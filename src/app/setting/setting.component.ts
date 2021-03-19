@@ -15,14 +15,14 @@ export class SettingComponent implements OnInit, OnDestroy {
   isSettingsFetched: boolean = false;
   settingSubscrition: Subscription;
 
-  constructor(private setingsService:SettingService) {
+  constructor(private settingsService:SettingService) {
 
   };
 
 
   ngOnInit(): void {
     // this.lunch = new SettingData( 50, 8);
-    this.settingSubscrition = this.setingsService.settings.subscribe((setting: Settings) => {
+    this.settingSubscrition = this.settingsService.settings.subscribe((setting: Settings) => {
         this.lunch = setting;
         this.isSettingsFetched = true;
       }
@@ -30,11 +30,8 @@ export class SettingComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    console.log('all valid data foundA', this.lunch);
-  }
-
-  emitNew(){
-    this.setingsService.emiitNewSetting();
+    // this.settingsService.save(this.lunch).subscribe()
+    // console.log('all valid data foundA', this.lunch);
   }
 
   ngOnDestroy(){

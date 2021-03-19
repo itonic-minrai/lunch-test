@@ -14,3 +14,8 @@ interface SettingData{
   price?: number;
   percentage?: number;
 };
+
+
+export interface SettingSaveResponse{
+  status: number;
+}

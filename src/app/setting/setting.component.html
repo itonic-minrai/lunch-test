@@ -10,6 +10,7 @@
                     #settingFrom="ngForm" 
                     (ngSubmit)="settingFrom.form.valid && onSubmit()" novalidate>
                     
+                    
                     <div class="form-group">
                         <label for="lunch-amount">{{lunch.lunchAmount.label}} *</label>
                         <input 
@@ -52,5 +53,4 @@
 
         </div>
     </div>
-    <button (click)="emitNew()">Emmit</button>
 </div>

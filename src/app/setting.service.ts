@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Settings, SettingResponse} from './setting';
+import { Settings, SettingResponse, SettingSaveResponse } from './setting';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
@@ -9,6 +9,7 @@ import { HttpClient } from '@angular/common/http';
 export class SettingService {
 
   settingSubject: BehaviorSubject<Settings> = new BehaviorSubject(null);
+  url: string = 'http://localhost:3000/settings';
 
   constructor(private http: HttpClient) {
 
@@ -16,27 +17,24 @@ export class SettingService {
 
   get settings(): Observable<Settings> {
     return this.settingSubject.asObservable();
-   
+
   }
 
-  fetchSettings(): void{
-    this.http.get<SettingResponse>('http://localhost:3000/settings').subscribe(res => {
+  fetch(): void {
+    this.http.get<SettingResponse>(this.url).subscribe(res => {
       if (200 == res.status) {
         this.settingSubject.next(res.data);
       }
     });
   }
 
-  emiitNewSetting(){
-    this.settingSubject.next({
-      "lunchAmount": {
-      "label": "lunch Amount",
-      "price": 50
-      },
-      "discountAmount": {
-      "label": "Discount amount",
-      "percentage": 80
+
+  save(settings: Settings): void {
+    this.http.post<SettingSaveResponse>(this.url, settings).subscribe(res => {
+      if (200 == res.status) {
+        // this.settingSubject.next(settings);
       }
-      });
+    });
   }
+
 }

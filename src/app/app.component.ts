@@ -6,6 +6,7 @@ import {SettingService} from './setting.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
+
 export class AppComponent {
   title = 'Tour of heroes';
   constructor(private setingsService:SettingService) {
@@ -15,6 +16,6 @@ export class AppComponent {
 
 
   ngOnInit(){
-    this.setingsService.fetchSettings();
+    this.setingsService.fetch();
   }
 }
