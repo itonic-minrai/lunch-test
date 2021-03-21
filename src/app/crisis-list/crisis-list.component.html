@@ -1,2 +1,7 @@
 <h3>CRISIS CENTER</h3>
-<p>Get your crisis here</p>
+<p>Get your crisis here</p>\
+{{ lunch | json }}
+<div *ngIf="lunch">
+{{lunch.lunchAmount.price}}
+{{lunch.discountAmount.percentage}}
+</div>

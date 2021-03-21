@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
+
 export class SettingService {
 
   settingSubject: BehaviorSubject<Settings> = new BehaviorSubject(null);
@@ -32,9 +33,23 @@ export class SettingService {
   save(settings: Settings): void {
     this.http.post<SettingSaveResponse>(this.url, settings).subscribe(res => {
       if (200 == res.status) {
-        // this.settingSubject.next(settings);
+        this.settingSubject.next(settings);
       }
     });
   }
+
+  emiitNewSetting(){
+    this.settingSubject.next({
+      "lunchAmount": {
+      "label": "lunch Amount",
+      "price": 50
+      },
+      "discountAmount": {
+      "label": "Discount amount",
+      "percentage": 80
+      }
+      });
+  }
+
 
 }

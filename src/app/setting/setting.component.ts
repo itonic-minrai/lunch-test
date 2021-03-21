@@ -12,7 +12,6 @@ import {Subscription} from 'rxjs';
 export class SettingComponent implements OnInit, OnDestroy {
 
   lunch: Settings;
-  isSettingsFetched: boolean = false;
   settingSubscrition: Subscription;
 
   constructor(private settingsService:SettingService) {
@@ -24,20 +23,24 @@ export class SettingComponent implements OnInit, OnDestroy {
     // this.lunch = new SettingData( 50, 8);
     this.settingSubscrition = this.settingsService.settings.subscribe((setting: Settings) => {
         this.lunch = setting;
-        this.isSettingsFetched = true;
       }
     );
   }
 
   onSubmit() {
+    this.settingsService.save(this.lunch);
     // this.settingsService.save(this.lunch).subscribe()
     // console.log('all valid data foundA', this.lunch);
   }
 
   ngOnDestroy(){
+    console.log('distroy')
     this.settingSubscrition.unsubscribe();
   }
 
+  emitNew(){
+    this.settingsService.emiitNewSetting();
+  }
 
 
 }

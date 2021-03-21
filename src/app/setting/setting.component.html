@@ -3,17 +3,17 @@
         <div class="panel panel-primary">
             <div class="panel-heading">Lunch Settings</div>
 
+            {{ lunch | json }}
             <div class="panel-body">
 
-                <form  *ngIf="isSettingsFetched"
+                <form  *ngIf="lunch"
                     name="setting"
                     #settingFrom="ngForm" 
                     (ngSubmit)="settingFrom.form.valid && onSubmit()" novalidate>
                     
-                    
                     <div class="form-group">
                         <label for="lunch-amount">{{lunch.lunchAmount.label}} *</label>
-                        <input 
+                        <input
                             id="amount"
                             class="form-control"
                             type="number" 
@@ -47,10 +47,12 @@
                     </div>
                    
                     <button class="btn btn-primary ng-star-inserted" type="submit" class="btn btn-success"> Submit</button>
+                    <button (click)="emitNew()">Emmit</button>
 
                 </form>
             </div>
 
         </div>
     </div>
+
 </div>
